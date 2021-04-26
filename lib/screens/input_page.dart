@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import './icon_content.dart';
-import './reuseble_card.dart';
-import './constants.dart';
+import '../components/icon_content.dart';
+import '../components/reuseble_card.dart';
+import '../constants.dart';
+import '../components/cal_default_button.dart';
+import '../calculator_brain.dart';
+
+import 'result_page.dart';
+import '../components/round_icon_button.dart';
 
 class InputPage extends StatefulWidget {
   @override
@@ -196,42 +201,22 @@ class _InputPageState extends State<InputPage> {
                 ),
               ],
             )),
-            GestureDetector(
-              onTap: (){
-                Navigator.pushNamed(context, '/result');
+            CalDefaultButton(
+              press: () {
+                CalculaterBMI calc =
+                    CalculaterBMI(height: height, weight: weight);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ResultPage(
+                            bmiResult: calc.calculatorBMI(),
+                            textResult: calc.getResult(),
+                            interpretation: calc.getInterpretation())));
               },
-              child: Container(
-                margin: EdgeInsets.only(top: 10),
-                width: double.infinity,
-                height: kContainerHeightBottom,
-                decoration: BoxDecoration(
-                    color: kContainerColorBottom,
-                    borderRadius: BorderRadius.circular(15.0)),
-                child: Center(
-                    child: Text(
-                  "CAL",
-                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),
-                )),
-              ),
+              text: "CALC",
             )
           ],
         ));
   }
 }
 
-class RoundIconButton extends StatelessWidget {
-  const RoundIconButton({@required this.icon, @required this.press});
-  final IconData icon;
-  final Function press;
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      child: Icon(icon),
-      elevation: 0.0,
-      onPressed: press,
-      constraints: BoxConstraints.tightFor(width: 50.0, height: 50.0),
-      shape: CircleBorder(),
-      fillColor: Color(0xFF4C4F5E),
-    );
-  }
-}

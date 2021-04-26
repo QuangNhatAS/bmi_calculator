@@ -7,3 +7,5 @@ const kInActiveCardColor = Color(0xFF111328);
 
 const kTextStyle = TextStyle(fontSize: 15.0, color: Color(0xFF8D8E98));
 const kTextNumberStyle = TextStyle(fontSize: 50.0, fontWeight: FontWeight.w900);
+
+const kTextTitle = TextStyle(fontSize: 45.0, fontWeight: FontWeight.w700);
